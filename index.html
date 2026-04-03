@@ -345,11 +345,19 @@ document.getElementById('trialForm').addEventListener('submit', function(e) {
  btn.textContent = 'LOCKING YOU IN...';
  btn.disabled = true;
  var data = Object.fromEntries(new FormData(this).entries());
- // Alert Barry via Telegram
- fetch('https://api.telegram.org/bot8313860730:AAHfdY5rS7BBZlmgZLc0drKpJcJQFhyCGak/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:'8024684558',text:'🎯 NEW AU TRIAL SIGNUP!\n\nVenue: '+(data.venue||'?')+'\nName: '+(data.name||'?')+'\nEmail: '+(data.email||'?')+'\nPhone: '+(data.phone||'?')+'\nPlan: '+(data.plan||'?')})}).catch(function(){});
+ fetch('https://api.telegram.org/bot8313860730:AAHfdY5rS7BBZlmgZLc0drKpJcJQFhyCGak/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:'8024684558',text:'🎯 NEW AU TRIAL SIGNUP!
+
+Venue: '+(data.venue||'?')+'
+Name: '+(data.name||'?')+'
+Email: '+(data.email||'?')+'
+Phone: '+(data.phone||'?')+'
+Plan: '+(data.plan||'?')})}).catch(function(){});
+ var forms = {gold:'212332067325851',platinum:'212332553709857',fortnightly:'212332789191863',monthly:'212332775925863'};
+ var formId = forms[data.plan] || forms['platinum'];
+ var params = new URLSearchParams({venueName:data.venue||'',fullName:data.name||'',email163:data.email||'',phoneNumber:data.phone||''});
  document.getElementById('trialForm').style.display='none';
  document.getElementById('successMsg').style.display='block';
- setTimeout(function(){window.location.href='https://form.jotform.com/212477747294871?venueName='+encodeURIComponent(data.venue||'')+'&fullName='+encodeURIComponent(data.name||'')+'&email='+encodeURIComponent(data.email||'')+'&phone='+encodeURIComponent(data.phone||'');},2500);
+ setTimeout(function(){window.location.href='https://pci.jotform.com/form/'+formId+'?'+params.toString();},2500);
 });
 var observer=new IntersectionObserver(function(entries){entries.forEach(function(el){if(el.isIntersecting){el.target.style.opacity='1';el.target.style.transform='translateY(0)';}});},{threshold:0.1});
 document.querySelectorAll('.step,.feature-card,.pricing-card,.stat').forEach(function(el,i){el.style.opacity='0';el.style.transform='translateY(28px)';el.style.transition='opacity .5s '+(i*.07)+'s ease,transform .5s '+(i*.07)+'s ease';observer.observe(el);});
