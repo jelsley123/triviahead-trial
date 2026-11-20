@@ -345,13 +345,6 @@ document.getElementById('trialForm').addEventListener('submit', function(e) {
  btn.textContent = 'LOCKING YOU IN...';
  btn.disabled = true;
  var data = Object.fromEntries(new FormData(this).entries());
- fetch('https://api.telegram.org/bot8313860730:AAHfdY5rS7BBZlmgZLc0drKpJcJQFhyCGak/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:'8024684558',text:'🎯 NEW AU TRIAL SIGNUP!
-
-Venue: '+(data.venue||'?')+'
-Name: '+(data.name||'?')+'
-Email: '+(data.email||'?')+'
-Phone: '+(data.phone||'?')+'
-Plan: '+(data.plan||'?')})}).catch(function(){});
  var forms = {gold:'212332067325851',platinum:'212332553709857',fortnightly:'212332789191863',monthly:'212332775925863'};
  var formId = forms[data.plan] || forms['platinum'];
  var params = new URLSearchParams({venueName:data.venue||'',fullName:data.name||'',email163:data.email||'',phoneNumber:data.phone||''});
